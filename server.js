@@ -49,8 +49,16 @@ function Book(info) {
   console.log(info);
   this.image_url = info.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = info.title || 'No title available';
-  this.author = info.author || 'No author by that name';
+  this.author = info.authors || 'No author by that name';
 }
+
+// errorHandler {
+//   if(error === undefined) {
+//     app.get('/error', (request, response) => {
+//       response.render('pages/error');
+//     });
+//   }
+// });
 
 //------------------------------
 // Callbacks
@@ -71,9 +79,9 @@ app.get('/', (request, response) => {
   response.render('pages/index');
 });
 
-// app.get('/error', (request, response) => {
-//   response.render('pages/error', {arrayOfItems: list});
-// });
+app.get('/error', (request, response) => {
+  response.render('pages/error');
+});
 
 
 
