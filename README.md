@@ -1,25 +1,31 @@
 # book_app
 Bookshelves for cool people
 
-## Number and name of feature: __#1__
+## Number and name of feature: __#1 Load App__
+* Estimate of time needed to complete: __1hr__
+* Start time: __8:10am__
+* Finish time: __??__
+* Actual time needed to complete: __??__
+
+## Number and name of feature: __#2 Google Books API__
+* Estimate of time needed to complete: __1hr__
+* Start time: __??__
+* Finish time: __??__
+* Actual time needed to complete: __??__
+
+## Number and name of feature: __#3 Browse search results__
 * Estimate of time needed to complete: __??__
 * Start time: __??__
 * Finish time: __??__
 * Actual time needed to complete: __??__
 
-## Number and name of feature: __#2__
+## Number and name of feature: __#4 Error Message__
 * Estimate of time needed to complete: __??__
 * Start time: __??__
 * Finish time: __??__
 * Actual time needed to complete: __??__
 
-## Number and name of feature: __#3__
-* Estimate of time needed to complete: __??__
-* Start time: __??__
-* Finish time: __??__
-* Actual time needed to complete: __??__
-
-## Number and name of feature: __#4__
+## Number and name of feature: __#5 Clean looking UI__
 * Estimate of time needed to complete: __??__
 * Start time: __??__
 * Finish time: __??__
@@ -27,7 +33,7 @@ Bookshelves for cool people
 
 # Project Name
 
-**Author**: Your Name Goes Here
+**Author**: Chloie and Felipe
 **Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
