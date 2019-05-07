@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/felipedelatorre/book_app#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "superagent": "^5.0.5"
