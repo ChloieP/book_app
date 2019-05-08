@@ -16,3 +16,6 @@ VALUES('John Steinbeck', 'Working Days: The Journals of The Grapes of Wrath', '9
 
 INSERT INTO books_app (author, title, isbn, image_url, description, bookshelf)
 VALUES('John Steinbeck', 'Conversations with John Steinbeck', '9780878053605', 'http://books.google.com/books?id=mY98rl2LiuEC&printsec=frontcover&dq=inauthor:Steinbeck&hl=&cd=3&source=gbs_api', 'A New York Times Bestselling Author. Winner of the 1962 Nobel Prize for Literature. In this short book illuminated by a deep understanding and love of humanity, John Steinbeck retells an old Mexican folk tale. For the diver Kino, finding a magnificent pearl means the promise of a better life for his impoverished family. His dream blinds him to the greed and suspicions the pearl arouses in him and his neighbors, and even his loving wife cannot stem the events leading to tragedy.', 'Test Passes' );
+
+INSERT INTO books_app (author, title, isbn, image_url, description, bookshelf)
+VALUES('John Steinbeck', 'Travels with Charley', '99780140053203', 'http://books.google.com/books?id=NZmvM-B8A-EC&printsec=frontcover&dq=inauthor:Steinbeck&hl=&cd=10&source=gbs_api', 'Steinbeck records his emotions and experiences during a journey of rediscovery in his native land.', 'Test Passes' );
