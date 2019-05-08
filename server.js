@@ -5,6 +5,16 @@
 //------------------------------
 const express = require('express');
 const superagent = require('superagent');
+const pg = require('pg');
+// const cors = require('cors');
+
+//------------------------------
+// Environment Variable
+//------------------------------
+
+require('dotenv').config();
+
+
 
 //------------------------------
 // Application Setup
@@ -18,7 +28,15 @@ const PORT = process.env.PORT || 3000;
 //------------------------------
 
 app.use(express.urlencoded({extended:true}));
-// app.use(express.static('public'));   ??? May USE LATER
+app.use(express.static('./public'));
+
+//------------------------------
+// Database Setup
+//------------------------------
+
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', err => console.error(err));
 
 //------------------------------
 // Server-Side Templating
@@ -83,6 +101,10 @@ app.get('/error', (request, response) => {
   response.render('pages/error');
 });
 
+// app.get('/error', (request, response) => {
+//   response.render('pages/error');
+// });
+// THIS IS TO BE FOR THE LIST VIEW
 
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

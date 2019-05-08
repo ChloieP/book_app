@@ -4,22 +4,50 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <link rel="stylesheet" href="/styles/reset.css" type="text/css">
+  <link rel="stylesheet" href="/styles/base.css" type="text/css">
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css">
+
+  <title>CO Cool Books</title>
 </head>
 
   <body>
-    <h1>List of Books</h1>
+    <header> 
+    <h1>Central Oregon Cool Books!</h1>
+    <p>X</p>
+    </header>
 
+    <section class="titleContainer">
+        <p>Available Books</p>
+      </section>
     <ul>
       <% searchResult.forEach(element => {  %> 
       <li><img src="<%= element.image_url %>"  alt=""></li>
       <li><%= element.title; %></li>
+      <li><img src="<%= element.author %>"  alt=""></li>
+      <li><%= element.author; %></li>
+      <li><img src="<%= element.description %>"  alt=""></li>
+      <li><%= element.description; %></li>
+      <button type="submit">Select This Book</button>
+
+      <form action="/searches/show" method="post">
+        <input type="text" name="search" placeholder="Populated Title" required>
+        <input type="text" name="search" placeholder="Populated Author" required>
+        <input type="text" name="search" placeholder="Populated Title" required>
+        <input type="text" name="search" placeholder="Populated Title" required>
+        <input type="text" name="search" placeholder="Populated ISBN" required>
+        <input type="text" name="search" placeholder="Populated Image URL" required>
+        <input type="text" name="search" placeholder="Populated description" required>
+        <input type="text" name="search" placeholder="Enter a bookshelf name" required>
+      </form>
+
+      <button type="submit">Add to Database</button>
       <% }); %>
+      
     </ul>
 
-
-    <button type="submit">Home </button>
-
+    
+    
 
   </body>
 
