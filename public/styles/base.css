@@ -1,9 +1,12 @@
+@import url("layout.css");
+
+
 body {
-  background-color: #4B0082;
+  background-color: #e4e3db;
 }
 
-h1, a {
-  color: #fffdd0;
+h1, a, p {
+  color: #fff;
 }
 
 span, h4 {

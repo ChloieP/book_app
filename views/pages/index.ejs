@@ -6,23 +6,37 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="/styles/reset.css" type="text/css">
   <link rel="stylesheet" href="/styles/base.css" type="text/css">
-  <title>Document</title>
+  <link rel="shortcut icon" type="image/png" href="/styles/fonts/book-icon-139.png"/>
+  <title>CO Cool Books</title>
 <style></style>
 </head>
 
-  <body>
-    <h1>Welcome</h1>
-    <p><a href="/error">See list</a></p>
-    <p><a href="/quantities">see list with quantities</a></p>
 
-    <h4>Search by Title or Author</h4>
+  <body>
+    <header>
+    <h1>Central Oregon Cool Books!!</h1>
+    <p>X</p>
+    </header>
+
+    <!-- Test
+    <p><a href="/error">See list</a></p>
+    <p><a href="/quantities">see list with quantities</a></p> -->
+
+    <section class="titleContainer">
+      <p>Search by Title or Author</p>
+    </section>
+
+
+    <section class="formContainer">
       <form action="/searches/show" method="post">
         <input type="text" name="search" placeholder="Enter a title or author" required>
+
         <fieldset>
           <label for="title">
             <span>Title</span>
             <input type="radio" name="search" value="title" required>
           </label>
+
         </fieldset>
         <fieldset>
             <label for="author">
@@ -30,9 +44,13 @@
               <input type="radio" name="search" value="author" required>
             </label>
         </fieldset>
+
+
         <button type="submit">Search the Google Books API</button>
       </form>
-    
+    </section>
+
+
   </body>
 
 
