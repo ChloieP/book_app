@@ -29,7 +29,7 @@ app.use(express.static('./public'));
 // }));
 
 
-// Database Setup 
+// Database Setup
 const client = new pg.Client(process.env.DATABASE_URL);
 client.connect();
 client.on('error', err => console.error(err));
@@ -43,6 +43,7 @@ app.set('view engine', 'ejs');
 
 // Routes
 //-----------------------------
+app.get('/', getBooks);
 app.post('/searches/show', performSearch);
 app.post('/books/detail', addBook);
 
@@ -60,16 +61,21 @@ function Book(info) {
   this.isbn = info.industryIdentifiers[1].identifier;
 }
 
-
-// errorHandler {
-//   if(error === undefined) {
-//     app.get('/error', (request, response) => {
-//       response.render('pages/error');
-//     });
-//   }
-// });
-
 // Callbacks
+
+function getBooks(request, response) {
+  let SQL = 'SELECT * from books_app;';
+
+  return client.query(SQL)
+    .then(result => response.render('pages/index', {results: result.rows}))
+    .catch(handleError);
+}
+
+
+
+
+
+
 
 function performSearch(request, response) {
   let url = `https://www.googleapis.com/books/v1/volumes?q=+in${request.body.search[1]}:${request.body.search[0]}`;
@@ -81,15 +87,13 @@ function performSearch(request, response) {
 }
 
 function addBook(request, response) {
-  let {author, title, isbn, image_url, description, bookshelf} = request.body.search[i];
-  console.log(request.body.search);
+  let [author, title, isbn, image_url, description, bookshelf] = request.body.search;
   let SQL = 'INSERT INTO books_app(author, title, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
   let values = [author, title, isbn, image_url, description, bookshelf];
-  console.log(values);
 
   return client.query(SQL, values)
     .then(result => {
-      response.redirect('/');
+      response.redirect('pages/index');
     })
     .catch(error => handleError(error, response));
 }

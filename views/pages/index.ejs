@@ -26,6 +26,20 @@
     </section>
 
 
+    <p>Hello</p>
+    <% results.forEach(books => { %>
+   <p> <%= books.title %> </p>
+    <% }); %>
+
+    <!-- <% results.forEach(task => { %>
+      <li class="task-item" data-id="<%= task.id %>">
+        <h4>Task: <%= task.title %></h4>
+        <p>Completion status: <%= task.status %></p>
+        <a href="/tasks/<%= task.id%>">View Details</a>
+      </li>
+    <% }) %> -->
+
+
 
 
   </body>
