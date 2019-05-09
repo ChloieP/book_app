@@ -81,10 +81,11 @@ function performSearch(request, response) {
 }
 
 function addBook(request, response) {
-  let {author, title, isbn, image_url, description, bookshelf} = request.body;
-  console.log('book');
+  let {author, title, isbn, image_url, description, bookshelf} = request.body.search[i];
+  console.log(request.body.search);
   let SQL = 'INSERT INTO books_app(author, title, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
   let values = [author, title, isbn, image_url, description, bookshelf];
+  console.log(values);
 
   return client.query(SQL, values)
     .then(result => {
