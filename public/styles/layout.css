@@ -54,6 +54,29 @@ form {
   width: 85%; 
 }
 
-input {
+.showContainer {
+  margin-top: 20px;
+  outline: 2px solid white;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+}
 
+img {
+  width: 45%;
+  height: auto;
+  margin: auto;
+}
+
+.showContainer h2 {
+  margin: 2px auto 2px auto;
+  font-size: 15px
+}
+
+.showContainer p {
+  color: black;
+  height: 150px;
+  width: 85%;
+  overflow: scroll;
+  margin: 5px auto 0px auto;
 }

@@ -10,5 +10,9 @@ h1, a, p {
 }
 
 span, h4 {
-  color: gold;
+  color: black;
+}
+
+.hideMe {
+  display: none;
 }
