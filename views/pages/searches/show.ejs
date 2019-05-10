@@ -31,12 +31,12 @@
 
         <section class="bookForm hideMe">
           <form action="/books/detail" method="post">
-            <input type="text" name="search" value="<%= element.title; %>" required>
-            <input type="text" name="search" value="<%= element.author; %>" required>
-            <input type="text" name="search" value="<%= element.image_url; %>" required>
-            <input type="text" name="search" value="<%= element.isbn; %>" required>
-            <input type="text" name="search" value="<%= element.description; %>" required>
-            <input type="text" name="search" placeholder="Enter a bookshelf name" required>
+            <input type="text" name="title" value="<%= element.title; %>" required>
+            <input type="text" name="author" value="<%= element.author; %>" required>
+            <input type="text" name="image_url" value="<%= element.image_url; %>" required>
+            <input type="text" name="isbn" value="<%= element.isbn; %>" required>
+            <input type="text" name="description" value="<%= element.description; %>" required>
+            <input type="text" name="bookshelf" placeholder="Enter a bookshelf name" required>
             <button type="submit">Add to Database</button>
           </form>
         </section>

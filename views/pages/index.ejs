@@ -22,25 +22,17 @@
 
 
     <section class="titleContainer">
-      <p># Saved Books</p>
+      <p><%=results.length%> Saved Books</p>
     </section>
 
-
-    <p>Hello</p>
+<section class="showContainer">
     <% results.forEach(books => { %>
-   <p> <%= books.title %> </p>
+   <img src="<%= books.image_url %>"  alt="">
+   <h2><%= books.title %> </h2>
+   <h2><%= books.author %></h2>
+   <p class="bookDescription"><%= books.description; %></p>
     <% }); %>
-
-    <!-- <% results.forEach(task => { %>
-      <li class="task-item" data-id="<%= task.id %>">
-        <h4>Task: <%= task.title %></h4>
-        <p>Completion status: <%= task.status %></p>
-        <a href="/tasks/<%= task.id%>">View Details</a>
-      </li>
-    <% }) %> -->
-
-
-
+</section>
 
   </body>
 

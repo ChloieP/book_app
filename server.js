@@ -58,7 +58,7 @@ function Book(info) {
   this.title = info.title || 'No title available';
   this.author = info.authors || 'No author by that name';
   this.description = info.description;
-  this.isbn = info.industryIdentifiers[1].identifier;
+  this.isbn = info.industryIdentifiers[1].identifier || 'No isbn';
 }
 
 // Callbacks
@@ -87,16 +87,19 @@ function performSearch(request, response) {
 }
 
 function addBook(request, response) {
-  let [author, title, isbn, image_url, description, bookshelf] = request.body.search;
-  let SQL = 'INSERT INTO books_app(author, title, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
+  let {author, title, isbn, image_url, description, bookshelf} = request.body;
+  let SQL = 'INSERT INTO books_app(author, title, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+  // RETURNING id??
   let values = [author, title, isbn, image_url, description, bookshelf];
 
   return client.query(SQL, values)
     .then(result => {
-      response.redirect('pages/index');
+      response.redirect('detail');
     })
     .catch(error => handleError(error, response));
 }
+
+
 
 app.get('/', (request, response) => {
   response.render('pages/index');

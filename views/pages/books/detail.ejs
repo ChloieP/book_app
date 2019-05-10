@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/styles/reset.css" type="text/css">
+  <link rel="stylesheet" href="/styles/base.css" type="text/css">
+  <link rel="shortcut icon" type="image/png" href="/styles/fonts/book-icon-139.png"/>
+  <title>CO Cool Books</title>
+<style></style>
+</head>
+
+
+  <body>
+    <header>
+    <h1>Central Oregon Cool Books!</h1>
+    <p>X</p>
+    <p><a href="./searches/new">X</a></p>
+    
+    </header>
+
+
+    <section class="titleContainer">
+      <p>detail</p>
+    </section>
+
+
+    <p>Hello</p>
+    <% results.forEach(books => { %>
+   <p> <%= books.title %> </p>
+    <% }); %>
+
+    <!-- <% results.forEach(task => { %>
+      <li class="task-item" data-id="<%= task.id %>">
+        <h4>Task: <%= task.title %></h4>
+        <p>Completion status: <%= task.status %></p>
+        <a href="/tasks/<%= task.id%>">View Details</a>
+      </li>
+    <% }) %> -->
+
+
+
+
+  </body>
+
+
+</html>
