@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../../layout/head') %>
+</head>
+  <body>
+
+    <header> 
+      <h1>Central Oregon Cool Books!</h1>
+      <p>X</p>
+    </header>
+
+    <section class="titleContainer">
+      <p>Detail View</p>
+    </section>
+
+    <section class="showContainer">  
+      <img src="<%=result.image_url%>" alt="">
+      <h2><%=result.title%></h2>
+      <h2><%= result.author%></h2>
+      <p><%= result.description%></p>
+    </section>
+    <button><a href="/">Main Menu</a></button>
+
+  </body>
+
+</html>

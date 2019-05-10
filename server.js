@@ -35,17 +35,16 @@ client.connect();
 client.on('error', err => console.error(err));
 
 // Server-Side Templating
-//--------------------------
 // For CSS
 app.use(express.static(__dirname + '/public'));
 // For rendering
 app.set('view engine', 'ejs');
 
 // Routes
-//-----------------------------
 app.get('/', getBooks);
 app.post('/searches/show', performSearch);
 app.post('/books/detail', addBook);
+app.get('/books/:book_id', getBookDetails);
 
 // Catch-All Maybe for later
 // app.get('*', (request, response) => response.status(404).send('This route does not exist'));
@@ -58,7 +57,7 @@ function Book(info) {
   this.title = info.title || 'No title available';
   this.author = info.authors || 'No author by that name';
   this.description = info.description;
-  this.isbn = info.industryIdentifiers[1].identifier;
+  this.isbn = info.industryIdentifiers[0].identifier || 'No isbn';
 }
 
 // Callbacks
@@ -73,10 +72,6 @@ function getBooks(request, response) {
 
 
 
-
-
-
-
 function performSearch(request, response) {
   let url = `https://www.googleapis.com/books/v1/volumes?q=+in${request.body.search[1]}:${request.body.search[0]}`;
 
@@ -87,16 +82,33 @@ function performSearch(request, response) {
 }
 
 function addBook(request, response) {
-  let [author, title, isbn, image_url, description, bookshelf] = request.body.search;
-  let SQL = 'INSERT INTO books_app(author, title, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
+  let {author, title, isbn, image_url, description, bookshelf} = request.body;
+  let SQL = 'INSERT INTO books_app(author, title, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+  // RETURNING id??
   let values = [author, title, isbn, image_url, description, bookshelf];
 
   return client.query(SQL, values)
     .then(result => {
-      response.redirect('pages/index');
+      response.redirect('/');
     })
     .catch(error => handleError(error, response));
 }
+
+
+
+function getBookDetails(request, response) {
+  let SQL = 'SELECT * FROM books_app WHERE id=$1;';
+  let values = [request.params.book_id];
+
+  return client.query(SQL, values) 
+    .then(result => {
+      return response.render('pages/books/show', {result: result.rows[0] });
+    })
+    .catch(error => handleError(error, response));
+}
+
+
+
 
 app.get('/', (request, response) => {
   response.render('pages/index');
