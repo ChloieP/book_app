@@ -35,17 +35,16 @@ client.connect();
 client.on('error', err => console.error(err));
 
 // Server-Side Templating
-//--------------------------
 // For CSS
 app.use(express.static(__dirname + '/public'));
 // For rendering
 app.set('view engine', 'ejs');
 
 // Routes
-//-----------------------------
 app.get('/', getBooks);
 app.post('/searches/show', performSearch);
 app.post('/books/detail', addBook);
+app.get('/books/:book_id', getBookDetails);
 
 // Catch-All Maybe for later
 // app.get('*', (request, response) => response.status(404).send('This route does not exist'));
@@ -58,7 +57,7 @@ function Book(info) {
   this.title = info.title || 'No title available';
   this.author = info.authors || 'No author by that name';
   this.description = info.description;
-  this.isbn = info.industryIdentifiers[1].identifier || 'No isbn';
+  this.isbn = info.industryIdentifiers[0].identifier || 'No isbn';
 }
 
 // Callbacks
@@ -70,10 +69,6 @@ function getBooks(request, response) {
     .then(result => response.render('pages/index', {results: result.rows}))
     .catch(handleError);
 }
-
-
-
-
 
 
 
@@ -94,10 +89,24 @@ function addBook(request, response) {
 
   return client.query(SQL, values)
     .then(result => {
-      response.redirect('detail');
+      response.redirect('/');
     })
     .catch(error => handleError(error, response));
 }
+
+
+
+function getBookDetails(request, response) {
+  let SQL = 'SELECT * FROM books_app WHERE id=$1;';
+  let values = [request.params.book_id];
+
+  return client.query(SQL, values) 
+    .then(result => {
+      return response.render('pages/books/show', {result: result.rows[0] });
+    })
+    .catch(error => handleError(error, response));
+}
+
 
 
 

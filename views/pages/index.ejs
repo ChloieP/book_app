@@ -1,16 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/styles/reset.css" type="text/css">
-  <link rel="stylesheet" href="/styles/base.css" type="text/css">
-  <link rel="shortcut icon" type="image/png" href="/styles/fonts/book-icon-139.png"/>
-  <title>CO Cool Books</title>
-<style></style>
-</head>
-
+  <head>
+    <%- include('../layout/head') %>
+  </head>
 
   <body>
     <header>
@@ -30,7 +22,7 @@
    <img src="<%= books.image_url %>"  alt="">
    <h2><%= books.title %> </h2>
    <h2><%= books.author %></h2>
-   <p class="bookDescription"><%= books.description; %></p>
+   <h2><a href="/books/<%=books.id%>"> View Details</a></h2>
     <% }); %>
 </section>
 
