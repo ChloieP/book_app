@@ -83,13 +83,13 @@ function performSearch(request, response) {
 
 function addBook(request, response) {
   let {author, title, isbn, image_url, description, bookshelf} = request.body;
-  let SQL = 'INSERT INTO books_app(author, title, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6);';
+  let SQL = 'INSERT INTO books_app(author, title, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
   // RETURNING id??
   let values = [author, title, isbn, image_url, description, bookshelf];
 
   return client.query(SQL, values)
     .then(result => {
-      response.redirect('/');
+      response.redirect(`/books/${result.rows[0].id}`);
     })
     .catch(error => handleError(error, response));
 }
