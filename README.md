@@ -1,40 +1,53 @@
 # book_app
 Bookshelves for cool people
 
-## Number and name of feature: __#1 Load App__
-* Estimate of time needed to complete: __1hr__
+## Number and name of feature: __#1.1 Database Configuration__
+* Estimate of time needed to complete: __2hr__
 * Start time: __8:10am__
-* Finish time: __??__
-* Actual time needed to complete: __??__
+* Finish time: __11:10am__
+* Actual time needed to complete: __3 hours__
 
-## Number and name of feature: __#2 Google Books API__
+## Number and name of feature: __#1.2 Save to Collection__
 * Estimate of time needed to complete: __1hr__
 * Start time: __??__
 * Finish time: __??__
 * Actual time needed to complete: __??__
 
-## Number and name of feature: __#3 Browse search results__
+## Number and name of feature: __#2 Book Details__
 * Estimate of time needed to complete: __??__
 * Start time: __??__
 * Finish time: __??__
 * Actual time needed to complete: __??__
 
-## Number and name of feature: __#4 Error Message__
+## Number and name of feature: __#3 User Book Details__
 * Estimate of time needed to complete: __??__
 * Start time: __??__
 * Finish time: __??__
 * Actual time needed to complete: __??__
 
-## Number and name of feature: __#5 Clean looking UI__
+## Number and name of feature: __#4 Add To Collection__
 * Estimate of time needed to complete: __??__
 * Start time: __??__
 * Finish time: __??__
-* Actual time needed to complete: __??__
+* Actual time needed to complete: ____
+
+## Number and name of feature: __#5 App Design Normalizatio__
+* Estimate of time needed to complete: __??__
+* Start time: __??__
+* Finish time: __??__
+* Actual time needed to complete: ____
+
+## Number and name of feature: __#6 Simple Clean UI__
+* Estimate of time needed to complete: __??__
+* Start time: __??__
+* Finish time: __??__
+* Actual time needed to complete: ____
+
 
 # Project Name
 
 **Author**: Chloie and Felipe
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.2.0 (increment the patch/fix version number if you make more commits past your first submission)
 
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for a Code 301 class. (i.e. What's your problem domain?) -->

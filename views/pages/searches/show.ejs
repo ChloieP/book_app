@@ -1,27 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+    <%- include('../../layout/head') %>
 </head>
-
   <body>
-    <h1>List of Books</h1>
 
-    <ul>
+    <header> 
+      <h1>Central Oregon Cool Books!</h1>
+      <p>X</p>
+    </header>
+
+    <section class="titleContainer">
+      <p>Available Books</p>
+    </section>
+
+    <section class="showContainer">  
+    
       <% searchResult.forEach(element => {  %> 
-      <li><img src="<%= element.image_url %>"  alt=""></li>
-      <li><%= element.title; %></li>
+        <img src="<%= element.image_url %>"  alt="">
+        <h2><%= element.title; %></h2>
+        <h2><%= element.author; %></h2>
+        <p class="bookDescription"><%= element.description; %></p>
+        <button class="selectBook" type="submit">Select This Book</button>
+
+        <section class="bookForm hideMe">
+          <form action="/books/detail" method="post">
+            <input type="text" name="title" value="<%= element.title; %>" required>
+            <input type="text" name="author" value="<%= element.author; %>" required>
+            <input type="text" name="image_url" value="<%= element.image_url; %>" required>
+            <input type="text" name="isbn" value="<%= element.isbn; %>" required>
+            <input type="text" name="description" value="<%= element.description; %>" required>
+            <input type="text" name="bookshelf" placeholder="Enter a bookshelf name" required>
+            <button type="submit">Add to Database</button>
+          </form>
+        </section>
       <% }); %>
-    </ul>
+    
 
-
-    <button type="submit">Home </button>
-
+    </section>
+    
 
   </body>
+
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="/js/app.js"></script>
 
 
 </html>

@@ -1,63 +1,78 @@
 'use strict';
 
-//------------------------------
 // Application Dependencies
-//------------------------------
 const express = require('express');
+const pg = require('pg');
 const superagent = require('superagent');
+const methodOverride = require('method-override');
 
-//------------------------------
+// Environment Variable
+require('dotenv').config();
+
 // Application Setup
-//------------------------------
-
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-//------------------------------
-// Application Middleware
-//------------------------------
-
+// Express middleware
 app.use(express.urlencoded({extended:true}));
-// app.use(express.static('public'));   ??? May USE LATER
+app.use(express.static('./public'));
 
-//------------------------------
+// Uncomment when ready
+// app.use(methodOverride(function (req, res) {
+//   if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+//     // look in urlencoded POST bodies and delete it
+//     console.log(req.body._method);
+//     var method = req.body._method
+//     delete req.body._method
+//     return method
+//   }
+// }));
+
+
+// Database Setup
+const client = new pg.Client(process.env.DATABASE_URL);
+client.connect();
+client.on('error', err => console.error(err));
+
 // Server-Side Templating
-//------------------------------
-
 // For CSS
 app.use(express.static(__dirname + '/public'));
 // For rendering
 app.set('view engine', 'ejs');
 
-//------------------------------
 // Routes
-//------------------------------
-
+app.get('/', getBooks);
 app.post('/searches/show', performSearch);
+app.post('/books/detail', addBook);
+app.get('/books/:book_id', getBookDetails);
 
-//------------------------------
 // Catch-All Maybe for later
-//------------------------------
 // app.get('*', (request, response) => response.status(404).send('This route does not exist'));
 
 
-//------------------------------
-// Constructor Functions
-//------------------------------
 
+// Constructor Functions
 function Book(info) {
-  console.log(info);
   this.image_url = info.imageLinks.thumbnail || 'https://i.imgur.com/J5LVHEL.jpg';
   this.title = info.title || 'No title available';
-  this.author = info.author || 'No author by that name';
+  this.author = info.authors || 'No author by that name';
+  this.description = info.description;
+  this.isbn = info.industryIdentifiers[0].identifier || 'No isbn';
 }
 
-//------------------------------
 // Callbacks
-//------------------------------
+
+function getBooks(request, response) {
+  let SQL = 'SELECT * from books_app;';
+
+  return client.query(SQL)
+    .then(result => response.render('pages/index', {results: result.rows}))
+    .catch(handleError);
+}
+
+
 
 function performSearch(request, response) {
-  console.log(request.body);
   let url = `https://www.googleapis.com/books/v1/volumes?q=+in${request.body.search[1]}:${request.body.search[0]}`;
 
   superagent.get(url)
@@ -66,15 +81,56 @@ function performSearch(request, response) {
     .catch(console.error);
 }
 
+function addBook(request, response) {
+  let {author, title, isbn, image_url, description, bookshelf} = request.body;
+  let SQL = 'INSERT INTO books_app(author, title, isbn, image_url, description, bookshelf) VALUES ($1, $2, $3, $4, $5, $6) RETURNING id;';
+  // RETURNING id??
+  let values = [author, title, isbn, image_url, description, bookshelf];
+
+  return client.query(SQL, values)
+    .then(result => {
+      response.redirect(`/books/${result.rows[0].id}`);
+    })
+    .catch(error => handleError(error, response));
+}
+
+
+
+function getBookDetails(request, response) {
+  let SQL = 'SELECT * FROM books_app WHERE id=$1;';
+  let values = [request.params.book_id];
+
+  return client.query(SQL, values) 
+    .then(result => {
+      return response.render('pages/books/show', {result: result.rows[0] });
+    })
+    .catch(error => handleError(error, response));
+}
+
+
+
 
 app.get('/', (request, response) => {
   response.render('pages/index');
 });
 
+app.get('/searches/new', (request, response) => {
+  response.render('pages/searches/new');
+});
+
+
+app.get('/error', (request, response) => {
+  response.render('pages/error');
+});
+
+
 // app.get('/error', (request, response) => {
-//   response.render('pages/error', {arrayOfItems: list});
+//   response.render('pages/error');
 // });
+// THIS IS TO BE FOR THE LIST VIEW
 
-
+function handleError(error, response){
+  response.render('pages/error', {error: 'Books error'});
+}
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));

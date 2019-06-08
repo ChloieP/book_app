@@ -1,11 +1,12 @@
 {
-  "name": "book_app",
+  "name": "books_app",
   "version": "1.0.0",
   "description": "Bookshelves for cool people",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "seed": "psql -d books_app -f ./data/book.sql"
   },
   "repository": {
     "type": "git",
@@ -19,8 +20,13 @@
   "homepage": "https://github.com/felipedelatorre/book_app#readme",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "method-override": "^3.0.0",
+    "nodemon": "^1.19.0",
+    "pg": "^7.10.0",
+    "save": "^2.3.3",
     "superagent": "^5.0.5"
   }
 }
